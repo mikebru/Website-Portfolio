@@ -1,29 +1,57 @@
 // Function to load the header
 function loadHeader() {
-    fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.body.insertAdjacentHTML('afterbegin', data);
-            
-            // Initialize dropdown functionality after header is loaded
-            initializeDropdown();
-        })
-        .catch(error => console.error('Error loading header:', error));
+    // Determine if we're in a project page or main page
+    const isProjectPage = window.location.pathname.includes('/projects/');
+    const headerPath = isProjectPage ? '../header.html' : 'header.html';
+    
+    // Create header HTML directly in JavaScript to avoid CORS issues with local files
+    const headerHTML = `
+    <header>
+        <nav>
+            <ul>
+                <li><a href="${isProjectPage ? '../index.html' : 'index.html'}">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Projects</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="${isProjectPage ? '../projects/39-inside.html' : 'projects/39-inside.html'}" class="project-link" data-project="39-inside">39 Inside</a></li>
+                        <li><a href="${isProjectPage ? '../projects/cerp.html' : 'projects/cerp.html'}" class="project-link" data-project="cerp">CERP</a></li>
+                        <li><a href="${isProjectPage ? '../projects/elemental-media.html' : 'projects/elemental-media.html'}" class="project-link" data-project="elemental-media">Elemental Media</a></li>
+                        <li><a href="${isProjectPage ? '../projects/earth-works.html' : 'projects/earth-works.html'}" class="project-link" data-project="earth-works">Earth Works</a></li>
+                        <li><a href="${isProjectPage ? '../projects/eyes-on-the-sky.html' : 'projects/eyes-on-the-sky.html'}" class="project-link" data-project="eyes-on-the-sky">Eyes on the Sky</a></li>
+                        <li><a href="${isProjectPage ? '../projects/simply-sand-play.html' : 'projects/simply-sand-play.html'}" class="project-link" data-project="simply-sand-play">Simply Sand Play</a></li>
+                        <li><a href="${isProjectPage ? '../projects/kiddo.html' : 'projects/kiddo.html'}" class="project-link" data-project="kiddo">Kiddo</a></li>
+                        <li><a href="${isProjectPage ? '../projects/maybe-happy-ending.html' : 'projects/maybe-happy-ending.html'}" class="project-link" data-project="maybe-happy-ending">Maybe Happy Ending</a></li>
+                        <li><a href="${isProjectPage ? '../projects/marcus.html' : 'projects/marcus.html'}" class="project-link" data-project="marcus">Marcus</a></li>
+                        <li><a href="${isProjectPage ? '../projects/nhks.html' : 'projects/nhks.html'}" class="project-link" data-project="nhks">NHKS</a></li>
+                    </ul>
+                </li>
+                <li><a href="${isProjectPage ? '../index.html#instagram' : '#instagram'}">Instagram</a></li>
+                <li><a href="${isProjectPage ? '../about.html' : 'about.html'}">About Me</a></li>
+            </ul>
+        </nav>
+    </header>
+    `;
+    
+    // Insert the header at the beginning of the body
+    document.body.insertAdjacentHTML('afterbegin', headerHTML);
+    
+    // Initialize dropdown functionality
+    initializeDropdown();
 }
 
 // Function to initialize dropdown functionality
 function initializeDropdown() {
-    // Add click event for project links
-    document.querySelectorAll('.project-link').forEach(link => {
-        link.addEventListener('click', function(e) {
+    // The dropdown toggle functionality
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
             e.preventDefault();
-            const projectId = this.getAttribute('data-project');
-            // For now, just log the project ID - in the future, this could navigate to project pages
-            console.log(`Navigate to project: ${projectId}`);
-            // You would typically redirect to a project page here, e.g.:
-            // window.location.href = `projects/${projectId}.html`;
+            // We don't need to do anything here since the CSS handles the display
+            // with :hover, but we need to prevent the default action
         });
     });
+    
+    // Project links now directly use href attributes instead of JavaScript navigation
+    // This is handled by the HTML links in the header
 }
 
 document.addEventListener('DOMContentLoaded', function() {

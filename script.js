@@ -25,7 +25,6 @@ function loadHeader() {
                         <li><a href="${isProjectPage ? '../projects/nhks.html' : 'projects/nhks.html'}" class="project-link" data-project="nhks">NHKS</a></li>
                     </ul>
                 </li>
-                <li><a href="${isProjectPage ? '../index.html#instagram' : '#instagram'}">Instagram</a></li>
                 <li><a href="${isProjectPage ? '../about.html' : 'about.html'}">About Me</a></li>
             </ul>
         </nav>

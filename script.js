@@ -1,4 +1,35 @@
+// Function to load the header
+function loadHeader() {
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.body.insertAdjacentHTML('afterbegin', data);
+            
+            // Initialize dropdown functionality after header is loaded
+            initializeDropdown();
+        })
+        .catch(error => console.error('Error loading header:', error));
+}
+
+// Function to initialize dropdown functionality
+function initializeDropdown() {
+    // Add click event for project links
+    document.querySelectorAll('.project-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const projectId = this.getAttribute('data-project');
+            // For now, just log the project ID - in the future, this could navigate to project pages
+            console.log(`Navigate to project: ${projectId}`);
+            // You would typically redirect to a project page here, e.g.:
+            // window.location.href = `projects/${projectId}.html`;
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Load the header
+    loadHeader();
+    
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {

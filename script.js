@@ -13,13 +13,14 @@ function loadHeader() {
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Projects</a>
                     <ul class="dropdown-menu">
+                        <li><a href="${isProjectPage ? '../projects/memorii.html' : 'projects/memorii.html'}" class="project-link" data-project="memorii">Memor-ii</a></li>
                         <li><a href="${isProjectPage ? '../projects/awry-awash.html' : 'projects/awry-awash.html'}" class="project-link" data-project="awry-awash">Awry Awash</a></li>
                         <li><a href="${isProjectPage ? '../projects/39-inside.html' : 'projects/39-inside.html'}" class="project-link" data-project="39-inside">39 Inside</a></li>
                         <li><a href="${isProjectPage ? '../projects/cerp.html' : 'projects/cerp.html'}" class="project-link" data-project="cerp">CERP</a></li>
                         <li><a href="${isProjectPage ? '../projects/elemental-media.html' : 'projects/elemental-media.html'}" class="project-link" data-project="elemental-media">Elemental Media</a></li>
                         <li><a href="${isProjectPage ? '../projects/earth-works.html' : 'projects/earth-works.html'}" class="project-link" data-project="earth-works">Earth Works</a></li>
                         <li><a href="${isProjectPage ? '../projects/eyes-on-the-sky.html' : 'projects/eyes-on-the-sky.html'}" class="project-link" data-project="eyes-on-the-sky">Eyes on the Sky</a></li>
-                        <li><a href="${isProjectPage ? '../projects/simply-sand-play.html' : 'projects/simply-sand-play.html'}" class="project-link" data-project="simply-sand-play">Simply Sand Play</a></li>
+                        <li><a href="${isProjectPage ? '../projects/ssp.html' : 'projects/ssp.html'}" class="project-link" data-project="ssp">Simply Sand Play</a></li>
                         <li><a href="${isProjectPage ? '../projects/kiddo.html' : 'projects/kiddo.html'}" class="project-link" data-project="kiddo">Kiddo</a></li>
                         <li><a href="${isProjectPage ? '../projects/maybe-happy-ending.html' : 'projects/maybe-happy-ending.html'}" class="project-link" data-project="maybe-happy-ending">Maybe Happy Ending</a></li>
                         <li><a href="${isProjectPage ? '../projects/marcus.html' : 'projects/marcus.html'}" class="project-link" data-project="marcus">Marcus</a></li>

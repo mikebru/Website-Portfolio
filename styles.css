@@ -12,14 +12,30 @@ body {
     line-height: 1.6;
 }
 
+/* Basic link styling */
 a {
     color: #fff;
     text-decoration: none;
-    transition: opacity 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 a:hover {
     opacity: 0.7;
+}
+
+/* Inline content links - for links within paragraphs or content areas */
+p a, .project-description a, .metadata-item a, .work-content a {
+    color: #00ccff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 204, 255, 0.3);
+    padding-bottom: 1px;
+    transition: all 0.3s ease;
+}
+
+p a:hover, .project-description a:hover, .metadata-item a:hover, .work-content a:hover {
+    color: #33ddff;
+    border-bottom: 1px solid rgba(0, 204, 255, 0.7);
+    opacity: 1;
 }
 
 /* Header and Navigation */
@@ -201,15 +217,50 @@ nav ul li a {
     aspect-ratio: 1 / 1;
 }
 
-.work-item img {
+.work-item img,
+.work-item video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
 
-.work-item:hover img {
+.work-item:hover img,
+.work-item:hover video {
     transform: scale(1.05);
+}
+
+/* Video item specific styles */
+.video-item {
+    position: relative;
+}
+
+.video-item::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    z-index: 2;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .work-title {

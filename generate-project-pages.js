@@ -99,21 +99,32 @@ console.log('Project page generation complete!');
 function processImageFolder(folderName) {
     console.log(`Processing folder: ${folderName}`);
     
-    // Get all images in the folder
+    // Get all media files in the folder (images and videos)
     const folderPath = path.join(IMAGES_DIR, folderName);
-    const imageFiles = fs.readdirSync(folderPath)
+    const mediaFiles = fs.readdirSync(folderPath)
         .filter(file => {
             const ext = path.extname(file).toLowerCase();
-            return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
+            return ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.mp4'].includes(ext);
         });
     
-    if (imageFiles.length === 0) {
-        console.log(`No images found in ${folderName}, skipping.`);
+    if (mediaFiles.length === 0) {
+        console.log(`No media files found in ${folderName}, skipping.`);
         return;
     }
     
     // Create a slug for the project (lowercase, replace spaces with hyphens)
     const projectSlug = folderName.toLowerCase().replace(/\s+/g, '-');
+    
+    // Filter out just the image files (for hero image selection)
+    const imageFiles = mediaFiles.filter(file => {
+        const ext = path.extname(file).toLowerCase();
+        return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
+    });
+    
+    if (imageFiles.length === 0) {
+        console.log(`No image files found in ${folderName} for hero image, skipping.`);
+        return;
+    }
     
     // Select a hero image
     let heroImage;
@@ -132,7 +143,7 @@ function processImageFolder(folderName) {
     }
     
     // Create the project page HTML
-    const projectHTML = generateProjectHTML(folderName, projectSlug, heroImage, imageFiles);
+    const projectHTML = generateProjectHTML(folderName, projectSlug, heroImage, mediaFiles);
     
     // Write the project page to file
     const outputPath = path.join(PROJECTS_DIR, `${projectSlug}.html`);
@@ -146,21 +157,83 @@ function processImageFolder(folderName) {
  * @param {string} projectName - The name of the project
  * @param {string} projectSlug - The slug for the project
  * @param {string} heroImage - The filename of the hero image
- * @param {string[]} imageFiles - Array of image filenames
+ * @param {string[]} mediaFiles - Array of media filenames (images and videos)
  * @returns {string} The HTML content for the project page
  */
-function generateProjectHTML(projectName, projectSlug, heroImage, imageFiles) {
+function generateProjectHTML(projectName, projectSlug, heroImage, mediaFiles) {
     // Format the project name for display (remove hyphens, capitalize words)
     const displayName = projectName.replace(/-/g, ' ');
     
+    // Check if there's an MP4 file that could be used as a hero video
+    const heroVideoFile = mediaFiles.find(file => 
+        path.extname(file).toLowerCase() === '.mp4' && 
+        file.toLowerCase().includes('hero')
+    );
+    
     // Create gallery items HTML
-    const galleryItemsHTML = imageFiles.map(image => {
-        const imagePath = `../Images/${projectName}/${image}`;
-        return `
-            <div class="gallery-item image">
-                <img src="${imagePath}" alt="${displayName} - ${image}">
+    const galleryItemsHTML = mediaFiles.map(file => {
+        const filePath = `../Images/${projectName}/${file}`;
+        const fileExt = path.extname(file).toLowerCase();
+        
+        // Handle different file types
+        if (fileExt === '.mp4') {
+            // Look for a thumbnail with the same name as the video but with .jpg, .jpeg, or .png extension
+            let thumbnailPath = null;
+            const baseName = file.substring(0, file.lastIndexOf('.'));
+            
+            // Check if thumbnail exists with same name but different extension
+            ['jpg', 'jpeg', 'png'].forEach(ext => {
+                const potentialThumbnail = `${baseName}.${ext}`;
+                if (mediaFiles.includes(potentialThumbnail)) {
+                    thumbnailPath = `../Images/${projectName}/${potentialThumbnail}`;
+                }
+            });
+            
+            return `
+            <div class="gallery-item video local-video">
+                <div class="video-thumbnail" data-video-path="${filePath}">
+                    <video src="${filePath}" preload="metadata" poster="${thumbnailPath || ''}" muted></video>
+                    <div class="play-button"></div>
+                </div>
             </div>`;
+        } else if (['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(fileExt)) {
+            return `
+            <div class="gallery-item image">
+                <img src="${filePath}" alt="${displayName} - ${file}">
+            </div>`;
+        }
+        
+        // Default case (shouldn't happen with our filtering)
+        return '';
     }).join('\n');
+    
+    // Generate hero section HTML based on whether we have a hero video
+    let heroSectionHTML;
+    if (heroVideoFile) {
+        // Use video as hero
+        heroSectionHTML = `
+    <section class="project-hero">
+        <video class="project-hero-video" autoplay loop muted playsinline>
+            <source src="../Images/${projectName}/${heroVideoFile}" type="video/mp4">
+            <!-- Fallback to static image if video doesn't load -->
+            <div class="project-hero-image" style="background-image: url('../Images/${projectName}/${heroImage}');"></div>
+        </video>
+        <div class="project-hero-content">
+            <h1>${displayName}</h1>
+            <p class="project-subtitle">Project Location | Year</p>
+        </div>
+    </section>`;
+    } else {
+        // Use static image as hero
+        heroSectionHTML = `
+    <section class="project-hero">
+        <div class="project-hero-image"></div>
+        <div class="project-hero-content">
+            <h1>${displayName}</h1>
+            <p class="project-subtitle">Project Location | Year</p>
+        </div>
+    </section>`;
+    }
     
     // Generate the full HTML
     return `<!DOCTYPE html>
@@ -176,21 +249,15 @@ function generateProjectHTML(projectName, projectSlug, heroImage, imageFiles) {
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         /* Project-specific styles */
-        .project-hero-image {
+        ${!heroVideoFile ? `.project-hero-image {
             background-image: url('../Images/${projectName}/${heroImage}');
-        }
+        }` : '/* Using video hero */'}
     </style>
 </head>
 <body>
     <!-- Header will be loaded via JavaScript -->
 
-    <section class="project-hero">
-        <div class="project-hero-image"></div>
-        <div class="project-hero-content">
-            <h1>${displayName}</h1>
-            <p class="project-subtitle">Project Location | Year</p>
-        </div>
-    </section>
+${heroSectionHTML}
 
     <section class="project-details">
         <div class="project-info">
@@ -228,6 +295,16 @@ function generateProjectHTML(projectName, projectSlug, heroImage, imageFiles) {
         <h2>Gallery</h2>
         <div class="gallery-grid">
             ${galleryItemsHTML}
+            
+            <!-- Vimeo embed placeholder - replace VIDEO_ID with actual Vimeo ID -->
+            <!-- 
+            <div class="gallery-item video vimeo-video">
+                <div class="video-thumbnail" data-vimeo-id="VIDEO_ID">
+                    <img src="https://vumbnail.com/VIDEO_ID.jpg" alt="Vimeo video">
+                    <div class="play-button"></div>
+                </div>
+            </div>
+            -->
         </div>
     </section>
 

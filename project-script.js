@@ -50,6 +50,37 @@ function initGallery() {
             currentItemIndex = galleryItems.indexOf(this);
             openLightboxWithItem(currentItemIndex);
         });
+        
+        // For video items, add click events to play buttons and thumbnails
+        if (item.classList.contains('video')) {
+            const playButton = item.querySelector('.play-button');
+            if (playButton) {
+                playButton.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent double triggering
+                    currentItemIndex = galleryItems.indexOf(item);
+                    openLightboxWithItem(currentItemIndex);
+                });
+            }
+            
+            const videoThumbnail = item.querySelector('.video-thumbnail');
+            if (videoThumbnail) {
+                videoThumbnail.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent double triggering
+                    currentItemIndex = galleryItems.indexOf(item);
+                    openLightboxWithItem(currentItemIndex);
+                });
+            }
+            
+            // For local videos, also add click event to the video element
+            const videoElement = item.querySelector('video');
+            if (videoElement) {
+                videoElement.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent double triggering
+                    currentItemIndex = galleryItems.indexOf(item);
+                    openLightboxWithItem(currentItemIndex);
+                });
+            }
+        }
     });
     
     // Navigation button event listeners
@@ -93,6 +124,7 @@ function openLightboxWithItem(index) {
     // Clear previous content
     lightboxMediaContainer.innerHTML = '';
     
+    // Prepare content based on item type
     if (item.classList.contains('image')) {
         const img = item.querySelector('img');
         
@@ -104,8 +136,10 @@ function openLightboxWithItem(index) {
         lightboxMediaContainer.appendChild(lightboxImg);
     } else if (item.classList.contains('video')) {
         const videoThumbnail = item.querySelector('.video-thumbnail');
-        const videoId = videoThumbnail.getAttribute('data-video-id');
+        let mediaAdded = false;
         
+        // Check for YouTube video
+        const videoId = videoThumbnail.getAttribute('data-video-id');
         if (videoId) {
             // Create YouTube iframe
             const iframe = document.createElement('iframe');
@@ -114,6 +148,39 @@ function openLightboxWithItem(index) {
             iframe.allowFullscreen = true;
             
             lightboxMediaContainer.appendChild(iframe);
+            mediaAdded = true;
+        }
+        
+        // Check for Vimeo video
+        if (!mediaAdded) {
+            const vimeoId = videoThumbnail.getAttribute('data-vimeo-id');
+            if (vimeoId) {
+                // Create Vimeo iframe
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://player.vimeo.com/video/${vimeoId}?autoplay=1`;
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                iframe.allowFullscreen = true;
+                
+                lightboxMediaContainer.appendChild(iframe);
+                mediaAdded = true;
+            }
+        }
+        
+        // Check for local video
+        if (!mediaAdded) {
+            const videoPath = videoThumbnail.getAttribute('data-video-path');
+            if (videoPath) {
+                // Create video element for local videos
+                const video = document.createElement('video');
+                video.src = videoPath;
+                video.controls = true;
+                video.autoplay = true;
+                video.loop = false;
+                video.style.maxWidth = '100%';
+                video.style.maxHeight = '80vh';
+                
+                lightboxMediaContainer.appendChild(video);
+            }
         }
     }
     

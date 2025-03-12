@@ -14,9 +14,19 @@
     <!-- Header will be loaded via JavaScript -->
 
     <section class="project-hero">
+        <!-- Option 1: Background Image Hero (default) -->
         <div class="project-hero-image">
             <!-- This background image will be set in CSS for specific projects -->
         </div>
+        
+        <!-- Option 2: Video Hero (uncomment and customize to use) -->
+        <!-- 
+        <video class="project-hero-video" autoplay loop muted playsinline>
+            <source src="path/to/video.mp4" type="video/mp4">
+            <div class="project-hero-image" style="background-image: url('path/to/fallback-image.jpg');"></div>
+        </video>
+        -->
+        
         <div class="project-hero-content">
             <h1>Project Title</h1>
             <p class="project-subtitle">Location, Year</p>
@@ -67,6 +77,22 @@
             <div class="gallery-item video">
                 <div class="video-thumbnail" data-video-id="VIDEO_ID_HERE">
                     <img src="https://img.youtube.com/vi/VIDEO_ID_HERE/maxresdefault.jpg" alt="Video thumbnail">
+                    <div class="play-button"></div>
+                </div>
+            </div>
+            
+            <!-- Vimeo embed example -->
+            <div class="gallery-item video vimeo-video">
+                <div class="video-thumbnail" data-vimeo-id="982865997">
+                    <img src="https://vumbnail.com/982865997.jpg" alt="Vimeo video thumbnail">
+                    <div class="play-button"></div>
+                </div>
+            </div>
+            
+            <!-- Local video example -->
+            <div class="gallery-item video local-video">
+                <div class="video-thumbnail" data-video-path="Images/Vixi/cover-vixi-512.0e5aa912.mp4">
+                    <video src="Images/Vixi/cover-vixi-512.0e5aa912.mp4" preload="metadata" muted></video>
                     <div class="play-button"></div>
                 </div>
             </div>

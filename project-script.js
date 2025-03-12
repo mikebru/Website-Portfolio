@@ -95,11 +95,10 @@ function openLightboxWithItem(index) {
     
     if (item.classList.contains('image')) {
         const img = item.querySelector('img');
-        const fullSizeImageSrc = img.getAttribute('data-full') || img.src;
         
-        // Create image element for lightbox
+        // Create image element for lightbox - use src directly
         const lightboxImg = document.createElement('img');
-        lightboxImg.src = fullSizeImageSrc;
+        lightboxImg.src = img.src;
         lightboxImg.alt = img.alt;
         
         lightboxMediaContainer.appendChild(lightboxImg);

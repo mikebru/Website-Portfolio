@@ -13,6 +13,7 @@ function loadHeader() {
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Projects</a>
                     <ul class="dropdown-menu">
+                        <li><a href="${isProjectPage ? '../projects/awry-awash.html' : 'projects/awry-awash.html'}" class="project-link" data-project="awry-awash">Awry Awash</a></li>
                         <li><a href="${isProjectPage ? '../projects/39-inside.html' : 'projects/39-inside.html'}" class="project-link" data-project="39-inside">39 Inside</a></li>
                         <li><a href="${isProjectPage ? '../projects/cerp.html' : 'projects/cerp.html'}" class="project-link" data-project="cerp">CERP</a></li>
                         <li><a href="${isProjectPage ? '../projects/elemental-media.html' : 'projects/elemental-media.html'}" class="project-link" data-project="elemental-media">Elemental Media</a></li>

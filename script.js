@@ -18,7 +18,7 @@ function loadHeader() {
                         <li><a href="${isProjectPage ? '../projects/39-inside.html' : 'projects/39-inside.html'}" class="project-link" data-project="39-inside">39 Inside</a></li>
                         <li><a href="${isProjectPage ? '../projects/illumaverse.html' : 'projects/illumaverse.html'}" class="project-link" data-project="cerp">Illumaverse</a></li>
                         <li><a href="${isProjectPage ? '../projects/elemental-media.html' : 'projects/elemental-media.html'}" class="project-link" data-project="elemental-media">Elemental Media</a></li>
-                        <li><a href="${isProjectPage ? '../projects/earth-works.html' : 'projects/earth-works.html'}" class="project-link" data-project="earth-works">Earth Works</a></li>
+                        <li><a href="${isProjectPage ? '../projects/tesla.html' : 'projects/tesla.html'}" class="project-link" data-project="earth-works">Cyber Rodeo</a></li>
                         <li><a href="${isProjectPage ? '../projects/eyes-on-the-sky.html' : 'projects/eyes-on-the-sky.html'}" class="project-link" data-project="eyes-on-the-sky">Eyes on the Sky</a></li>
                         <li><a href="${isProjectPage ? '../projects/ssp.html' : 'projects/ssp.html'}" class="project-link" data-project="ssp">Simply Sand Play</a></li>
                         <li><a href="${isProjectPage ? '../projects/kiddo.html' : 'projects/kiddo.html'}" class="project-link" data-project="kiddo">Kiddo</a></li>

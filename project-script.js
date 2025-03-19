@@ -15,7 +15,72 @@ let nextButton;
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the gallery and lightbox
     initGallery();
+    
+    // Initialize YouTube background if present
+    initYouTubeBackground();
 });
+
+/**
+ * Initialize YouTube background video if data attribute is present
+ */
+function initYouTubeBackground() {
+    const youtubeBackground = document.getElementById('youtube-background');
+    if (!youtubeBackground) return;
+    
+    const videoId = youtubeBackground.getAttribute('data-youtube-id');
+    if (!videoId) return;
+    
+    // Load YouTube API
+    if (!window.YT) {
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+        // Set up global callback for when YouTube API is ready
+        window.onYouTubeIframeAPIReady = function() {
+            createYouTubePlayer(youtubeBackground, videoId);
+        };
+    } else {
+        // YouTube API already loaded
+        createYouTubePlayer(youtubeBackground, videoId);
+    }
+}
+
+/**
+ * Create YouTube player for background video
+ * @param {HTMLElement} container - The container element
+ * @param {string} videoId - YouTube video ID
+ */
+function createYouTubePlayer(container, videoId) {
+    new YT.Player(container.id, {
+        videoId: videoId,
+        playerVars: {
+            'autoplay': 1,
+            'controls': 0,
+            'showinfo': 0,
+            'rel': 0,
+            'loop': 1,
+            'playlist': videoId, // Same as videoId, needed for looping
+            'mute': 1,
+            'playsinline': 1,
+            'modestbranding': 1
+        },
+        events: {
+            'onReady': function(event) {
+                event.target.playVideo();
+                // Set quality to highest available
+                event.target.setPlaybackQuality('hd1080');
+            },
+            'onStateChange': function(event) {
+                // If video ends, restart it
+                if (event.data === YT.PlayerState.ENDED) {
+                    event.target.playVideo();
+                }
+            }
+        }
+    });
+}
 
 /**
  * Initialize gallery and lightbox functionality

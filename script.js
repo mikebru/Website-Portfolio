@@ -21,7 +21,7 @@ function loadHeader() {
                         <li><a href="${isProjectPage ? '../projects/tesla.html' : 'projects/tesla.html'}" class="project-link" data-project="earth-works">Cyber Rodeo</a></li>
                         <li><a href="${isProjectPage ? '../projects/biolumen.html' : 'projects/biolumen.html'}" class="project-link" data-project="biolumen">BioLumen</a></li>
                         <li><a href="${isProjectPage ? '../projects/ssp.html' : 'projects/ssp.html'}" class="project-link" data-project="ssp">Simply Sand Play</a></li>
-                        <li><a href="${isProjectPage ? '../projects/kiddo.html' : 'projects/kiddo.html'}" class="project-link" data-project="kiddo">Kiddo</a></li>
+                        <li><a href="${isProjectPage ? '../projects/kiddo.html' : 'projects/kiddo.html'}" class="project-link" data-project="kiddo">K ! :D D: Ö</a></li>
                         <li><a href="${isProjectPage ? '../projects/maybe-happy-ending.html' : 'projects/maybe-happy-ending.html'}" class="project-link" data-project="maybe-happy-ending">Maybe Happy Ending</a></li>
                         <li><a href="${isProjectPage ? '../projects/marcus.html' : 'projects/marcus.html'}" class="project-link" data-project="marcus">Marcus</a></li>
                         <li><a href="${isProjectPage ? '../projects/nhks.html' : 'projects/nhks.html'}" class="project-link" data-project="nhks">NHKS</a></li>

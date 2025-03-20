@@ -28,6 +28,7 @@ function loadHeader() {
                     </ul>
                 </li>
                 <li><a href="${isProjectPage ? '../about.html' : 'about.html'}">About Me</a></li>
+                <li><a href="${isProjectPage ? '../teaching.html' : 'teaching.html'}">Teaching</a></li>
             </ul>
         </nav>
     </header>

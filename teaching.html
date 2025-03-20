@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching Portfolio - Media + Architecture + Ecology</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .teaching-section {
+            padding: 120px 20px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .teaching-section h1 {
+            font-size: 42px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .teaching-intro {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+        
+        .teaching-intro p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .class-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .class-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .class-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .class-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .class-card:hover .class-image img {
+            transform: scale(1.05);
+        }
+        
+        .class-content {
+            padding: 25px;
+        }
+        
+        .class-title {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        
+        .class-subtitle {
+            font-size: 16px;
+            font-weight: 300;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .class-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #aaa;
+        }
+        
+        .class-skills {
+            margin-top: 20px;
+        }
+        
+        .class-skills h4 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+        
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .skill-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #ddd;
+        }
+        
+        @media (max-width: 900px) {
+            .classes-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header will be loaded via JavaScript -->
+
+    <section class="teaching-section">
+        <h1>Teaching Portfolio</h1>
+        
+        <div class="teaching-intro">
+            <p>As an Instructional Assistant Professor at Texas A&M University's College of Performance, Visualization and Fine Art, I teach a variety of courses focused on interactive design, digital media, and creative technology. My teaching philosophy emphasizes hands-on learning, creative problem-solving, and the integration of technical skills with artistic expression.</p>
+        </div>
+        
+        <div class="classes-grid">
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="Images/video-placeholder.jpg" alt="VIST 110 - Design Foundations">
+                </div>
+                <div class="class-content">
+                    <h3 class="class-title">VIST 110</h3>
+                    <div class="class-subtitle">Design Foundations</div>
+                    <div class="class-description">
+                        <p>An introduction to the fundamental principles of design, including composition, color theory, typography, and visual hierarchy. Students develop critical thinking and problem-solving skills through a series of hands-on projects that explore both traditional and digital media.</p>
+                    </div>
+                    <div class="class-skills">
+                        <h4>Key Topics</h4>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Design Principles</span>
+                            <span class="skill-tag">Color Theory</span>
+                            <span class="skill-tag">Typography</span>
+                            <span class="skill-tag">Composition</span>
+                            <span class="skill-tag">Visual Communication</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="Images/video-placeholder.jpg" alt="VIST 210 - Interactive Design">
+                </div>
+                <div class="class-content">
+                    <h3 class="class-title">VIST 210</h3>
+                    <div class="class-subtitle">Interactive Design</div>
+                    <div class="class-description">
+                        <p>This course explores the principles and practices of designing interactive experiences. Students learn to create engaging user interfaces and interactive systems through a combination of theoretical concepts and practical applications, with a focus on user-centered design methodologies.</p>
+                    </div>
+                    <div class="class-skills">
+                        <h4>Key Topics</h4>
+                        <div class="skills-tags">
+                            <span class="skill-tag">UI/UX Design</span>
+                            <span class="skill-tag">Prototyping</span>
+                            <span class="skill-tag">User Testing</span>
+                            <span class="skill-tag">Interaction Models</span>
+                            <span class="skill-tag">Web Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="Images/video-placeholder.jpg" alt="VIST 289 - Special Topics in Visualization">
+                </div>
+                <div class="class-content">
+                    <h3 class="class-title">VIST 289</h3>
+                    <div class="class-subtitle">Special Topics in Visualization</div>
+                    <div class="class-description">
+                        <p>A project-based course that explores emerging technologies and specialized topics in visualization. Content varies by semester, covering areas such as virtual reality, real-time graphics, interactive installations, and experimental media. Students develop technical skills while creating innovative visual experiences.</p>
+                    </div>
+                    <div class="class-skills">
+                        <h4>Key Topics</h4>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Emerging Technologies</span>
+                            <span class="skill-tag">TouchDesigner</span>
+                            <span class="skill-tag">VR/AR</span>
+                            <span class="skill-tag">Interactive Media</span>
+                            <span class="skill-tag">Creative Coding</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="class-card">
+                <div class="class-image">
+                    <img src="Images/video-placeholder.jpg" alt="VIST 205 - Digital Image">
+                </div>
+                <div class="class-content">
+                    <h3 class="class-title">VIST 205</h3>
+                    <div class="class-subtitle">Digital Image</div>
+                    <div class="class-description">
+                        <p>This course covers the fundamentals of digital image creation, manipulation, and optimization. Students learn industry-standard software and techniques for creating and editing digital imagery, with an emphasis on both technical proficiency and creative expression.</p>
+                    </div>
+                    <div class="class-skills">
+                        <h4>Key Topics</h4>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Adobe Photoshop</span>
+                            <span class="skill-tag">Digital Painting</span>
+                            <span class="skill-tag">Image Composition</span>
+                            <span class="skill-tag">Photo Manipulation</span>
+                            <span class="skill-tag">Digital Asset Creation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>For more information about these courses or teaching inquiries, please <a href="mailto:michaelbruner@tamu.edu">contact me</a>.</p>
+        <p>&copy; 2025 Michael Bruner</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
